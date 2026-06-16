@@ -68,6 +68,7 @@ class Player(pygame.sprite.Sprite):
 
         # GRAPHICS AND ANIMATION SETUP
         self.import_assets()  # Load all animation frames
+        # @STUDENT-EDIT-Day2-3: Modify the player's starting direction ('down' -> 'left', etc.)
         self.status = "down_idle"  # Start facing down and not moving
         self.frame_index = 0  # Which animation frame to show
 
@@ -83,7 +84,7 @@ class Player(pygame.sprite.Sprite):
         self.pos = pygame.math.Vector2(
             self.rect.center
         )  # Precise position (can have decimals)
-        self.speed = 200  # How fast the player moves (pixels per second)
+        self.speed = PLAYER_SPEED  # How fast the player moves (pixels per second)
 
         # COLLISION DETECTION
         self.hitbox = self.rect.copy().inflate((-126, -70))  # Smaller box for collision
@@ -302,6 +303,7 @@ class Player(pygame.sprite.Sprite):
             "left_water": [],  # Using watering can while facing left
             "up_water": [],  # Using watering can while facing up
             "down_water": [],  # Using watering can while facing down
+            # @STUDENT-EDIT-Day5-2: Add custom animation folder path here (e.g. 'celebrate')
         }
 
         # Load the animation frames for each animation state
@@ -371,6 +373,7 @@ class Player(pygame.sprite.Sprite):
 
             # MOVEMENT CONTROLS
             # Handle vertical movement (up/down)
+            # @STUDENT-EDIT-Day2-5: Amend input controls to allow WASD movement using the logical 'or'
             if keys[pygame.K_UP]:
                 self.direction.y = -1  # Move up (negative Y)
                 self.status = "up"  # Set animation state
@@ -606,6 +609,8 @@ class Player(pygame.sprite.Sprite):
         self.rect.centery = self.hitbox.centery
         # Check for vertical collisions separately
         self.collision("vertical")
+
+        # @STUDENT-EDIT-Day2-4: Add a simple boundary check 'if' statement to prevent the player from leaving the screen.
 
     def update(self, dt):
         """

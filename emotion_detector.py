@@ -236,9 +236,15 @@ class EmotionDetector(threading.Thread):
 
                             with torch.no_grad():
                                 output = self.model(image_tensor)
-                                # @STUDENT-EDIT-Week2_Day2-2: Adjust the confidence threshold for emotion detection here if needed
-                                pred_idx = torch.argmax(output, dim=1).item()
-                                emotion = self.emotion_names[pred_idx]
+                                # @STUDENT-EDIT-Week2_Day2-2: Adjust the confidence threshold for emotion detection here if needed (e.g. 0.5)
+                                probabilities = torch.nn.functional.softmax(output, dim=1)
+                                max_prob, pred_idx = torch.max(probabilities, dim=1)
+                                
+                                if max_prob.item() > 0.5:
+                                    emotion = self.emotion_names[pred_idx.item()]
+                                else:
+                                    emotion = "neutral"
+                                
                                 self.emotions_deque.append(emotion)
 
                     last_emotion_time = current_time

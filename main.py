@@ -2,7 +2,7 @@
 PyDew Valley - Educational Game for Learning Python
 ==================================================
 This is the main game file that starts and runs our farming simulation game.
-Students will learn Python concepts through game development!
+We will learn Python concepts through game development!
 
 Educational Concepts Covered:
 - Classes and Object-Oriented Programming
@@ -10,7 +10,6 @@ Educational Concepts Covered:
 - Pygame library usage
 - Module imports and organization
 """
-# [1] Main game entry point with module imports and installation
 # [1] Main game entry point with module imports and installation
 
 # Import required modules for our game
@@ -30,7 +29,6 @@ import sys  # System operations
 import os  # Operating system interface
 
 # Import our custom game modules
-# @STUDENT-EDIT-Day1-2: Notice how settings variables are imported and used here
 from settings import *  # Game configuration settings
 from main_menu import MainMenu  # Main menu system
 import game_settings  # Audio and game settings
@@ -95,6 +93,8 @@ class Game:
         self.emotion_detector = None
         # Don't import EmotionDetector at startup - too slow
         # It will be created later when start_game() is called if camera is enabled
+
+        # @STUDENT-EDIT-Day1-5: Insert a print("Game starting!") statement here to see when the game starts
 
     def show_loading_screen(self, message="Loading...", delay_ms=250):
         """Display a loading screen with game title and animated loading bar."""

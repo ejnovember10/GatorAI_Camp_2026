@@ -118,6 +118,7 @@ class AIDialogueManager:
         Dialogue:
         """
 
+        # @STUDENT-EDIT-Week2_Day5-2: Final codebase cleanup (e.g. remove or comment out these test print statements before presenting)
         # Debug: Print the prompt being sent to AI
         print(f"🤖 AI Prompt Debug:")
         print(f"   Character: {character_name} ({character_role})")
@@ -130,6 +131,7 @@ class AIDialogueManager:
                 messages=[
                     {
                         "role": "system",
+                        # @STUDENT-EDIT-Week2_Day5-1: Fine-tune prompt engineering constraints before the final presentation (e.g. add new instructions here)
                         "content": "You are a helpful NPC in a farming simulation game. Keep responses brief, friendly, and appropriate for all ages.",
                     },
                     {"role": "user", "content": prompt},
@@ -146,6 +148,7 @@ class AIDialogueManager:
         self, character_name: str, player_context: str, emotion: str
     ) -> str:
         """Provides static fallback dialogue when the AI service is unavailable."""
+        # @STUDENT-EDIT-Week2_Day4-2: Create custom fallback responses for when the API is down
         # Simple fallback logic for Merchant Pete with emotion considerations
         if "Merchant Pete" in character_name:
             if emotion == "happy":

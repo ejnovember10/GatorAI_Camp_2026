@@ -10,6 +10,7 @@ Educational Concepts:
 - Coordinate systems and positioning
 - Game design parameters
 """
+# @STUDENT-EDIT-Day1-1: Examine datatypes in settings.py (identify strings, integers, lists). Add your own comment describing a variable.
 
 from pygame.math import Vector2
 
@@ -18,11 +19,18 @@ from pygame.math import Vector2
 # =============================================================================
 # These control how big our game window is and how detailed the graphics are
 
+# @STUDENT-EDIT-Day1-3: Change the game window size
 SCREEN_WIDTH = 1280  # Width of game window in pixels
 SCREEN_HEIGHT = 720  # Height of game window in pixels
-# @STUDENT-EDIT-Day1-1: Change TITLE to your own game name
+# @STUDENT-EDIT-Day1-2: Customize the game window title (TITLE)
 TITLE = "PyDew Valley: GAIC 26"
+# @STUDENT-EDIT-Day1-4: Experiment with different background colors
+WATER_COLOR = "#71ddee"  # Hex color code for the water background
 TILE_SIZE = 64  # Size of each tile in our game world (pixels)
+
+# @STUDENT-EDIT-Day5-1: Customize the player name and greeting variables
+PLAYER_NAME = "Farmer"
+GREETING = "Hello there!"
 
 # =============================================================================
 # USER INTERFACE POSITIONS
@@ -98,6 +106,9 @@ GROW_SPEED = {
     "corn": 0.1,  # Corn grows relatively fast
     "tomato": 0.07,  # Tomatoes grow a bit slower
 }
+
+# @STUDENT-EDIT-Day2-2: Change the player's movement speed (PLAYER_SPEED)
+PLAYER_SPEED = 200
 
 # =============================================================================
 # ECONOMIC SYSTEM - PRICES AND VALUES
