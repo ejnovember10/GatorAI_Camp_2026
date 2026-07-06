@@ -36,6 +36,13 @@ from main_menu import MainMenu  # Main menu system
 import game_settings  # Audio and game settings
 from collections import deque
 
+# @STUDENT-EDIT-Day2-8: Notice the THREE import styles used above:
+#   from settings import *          -> pulls in EVERYTHING from settings.py (use sparingly)
+#   from main_menu import MainMenu   -> pulls in ONE specific thing (a class)
+#   import game_settings             -> imports the WHOLE module; call it as game_settings.load_settings()
+# You can also rename a library on import, e.g. `import game_settings as gs`.
+# In a terminal, try help(pygame) or dir(pygame) to explore what a library offers.
+
 
 class Game:
     """
@@ -92,6 +99,9 @@ class Game:
         # It will be created later when start_game() is called if camera is enabled
 
         # @STUDENT-EDIT-Day1-5: Insert a print("Game starting!") statement here to see when the game starts
+        # @STUDENT-EDIT-Day1-6: Combine text AND a variable using an f-string (note the
+        # f before the opening quote). Try adding: print(f"Welcome to {TITLE}!")
+        # The {TITLE} part gets replaced with the value of TITLE from settings.py.
 
     def show_loading_screen(self, message="Loading...", delay_ms=250):
         """Display a loading screen with game title and animated loading bar."""

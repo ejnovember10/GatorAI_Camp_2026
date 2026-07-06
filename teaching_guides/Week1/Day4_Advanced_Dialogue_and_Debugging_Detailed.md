@@ -4,9 +4,15 @@
 Enhance dialogue systems, tie interactions to sprite actions, and learn debugging.
 
 ## Core Concepts
+
+> **Ordering note:** Day 4 is the **deep version of the notebook's early "read the error"
+> moment** (previewed lightly on Day 1) and the home for the notebook's **variable scope**
+> teaching point (deferred from the Day 2 functions block).
+
 - **Refining Dialogue** — multi-page text, wrapping, callbacks
 - **Sprite Interaction** — tying an action (like a screen shake) to an event
 - **Basic Debugging** — `print()` to track variables, reading error messages
+- **Variable Scope** — local (inside a function) vs global variables
 
 ## Exercise: Complex Dialogue
 The student-facing steps live in
@@ -148,6 +154,24 @@ output:
 - Common errors to demo on purpose: an `IndentationError` (mis-indent a line inside an
   `if`), a `KeyError` (look up a missing dictionary key — then fix it with `.get()`),
   and a `NameError` (typo a variable name).
+
+### Variable Scope (Local vs Global)
+**Files**: any player method, e.g. [player.py](../../player.py) — `get_target_pos()`
+
+The notebook's function BONUS on scope lands here, reinforcing Day 2's functions:
+
+```python
+    def get_target_pos(self):
+        direction = self.status.split("_")[0]   # 'direction' is LOCAL to this method
+        tool_offset = PLAYER_TOOL_OFFSET[direction]
+        self.target_pos = self.rect.center + tool_offset   # saved on self -> usable elsewhere
+```
+
+**DETAILED WALKTHROUGH:**
+- `direction` exists **only inside** `get_target_pos()` — it's *local* and vanishes when
+  the method returns. To keep a value around, either `return` it or store it on `self`
+  (like `self.target_pos`). A great live demo: try printing a function's local variable
+  from outside and read the resulting `NameError` — proof that scope is real.
 
 ### Animation State as a Mini State-Machine
 **File**: [player.py](../../player.py) — `get_status()` and `animate()`

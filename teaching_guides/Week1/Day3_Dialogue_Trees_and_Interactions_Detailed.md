@@ -4,9 +4,14 @@
 Create branching conversations and interactive dialogue systems.
 
 ## Core Concepts
+
+> **Ordering note:** Day 3 introduces no new "Python for AI" notebook concepts — it
+> *deepens* Day 2's **lists** into **dictionaries** (`key: value` pairs) using the
+> dialogue system. Frame it explicitly: "Day 2 gave us lists; today, dictionaries."
+
 - **Introduction to Dialogue Trees**
   - Storing dialogue in data structures (lists / dictionaries)
-- **Using Lists and Dictionaries**
+- **Using Lists and Dictionaries** — including `.get(key, default)`
 - **Loops and Conditionals for Navigating Dialogue**
 
 ## Exercise: Implementing a Conversation

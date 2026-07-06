@@ -26,3 +26,15 @@ def import_folder_dict(folder_path):
 			surface_dict[image.split('.')[0]] = image_surf
 
 	return surface_dict
+
+
+# @STUDENT-EDIT-Day2-7: You've just read two real FUNCTIONS above (import_folder and
+# import_folder_dict). Now write your OWN! A function has: a `def` line with a name and
+# inputs, a docstring, indented code, and (usually) a `return`. Try writing:
+#
+#   def add(x, y):
+#       '''Take two values and return their sum.'''
+#       return x + y
+#
+# Then call it - add(3, 4) should give 7. Challenge: write square(n) that returns n ** 2.
+# (You can practice functions in scratch.py too.)

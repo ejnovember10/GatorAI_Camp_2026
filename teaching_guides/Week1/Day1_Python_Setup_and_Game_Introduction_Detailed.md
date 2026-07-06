@@ -13,20 +13,37 @@ Set up programming environment and begin coding fundamentals.
 5. **Hello World**: Demonstrate running "Hello, World!" in a Python script
 
 ## Core Concepts
+
+> **Ordering note:** Day 1 covers the "Python for AI" notebook's *single-value
+> fundamentals* in the notebook's order: variables → print → f-strings → reading errors
+> → order of execution → calculations → PEMDAS → data types & casting. **Libraries and
+> importing move to Day 2** (to match the notebook, which teaches libraries after lists
+> and naming). On Day 1 we only *notice* the `import` lines at the top of `main.py` and
+> promise a proper explanation tomorrow. Comments (`#`) are *used* today too (students
+> write their first one at `@STUDENT-EDIT-Day1-1`); the notebook formally covers comments
+> on Day 2, so Day 2 revisits the *why* of commenting.
+
 ### Basic Python Syntax
-- Simple print statements and comments
+- Simple print statements and `#` comments
 - Indentation rules in Python
 
-### Libraries and Importing
-- Explain how to import and use external libraries
+### Variables & Data Types
+- Integers, floats, strings, dictionaries
+- The `type()` function and type casting (`int()`, `float()`)
+- Assign simple values (character names, positions, etc.)
+
+### Printing and f-strings
+- `print()` to display text and variables; f-strings to combine them (`f"...{var}..."`)
+
+### Reading Error Messages
+- `NameError`, and reading the **last line** of a traceback
+
+### Arithmetic
+- Using variables in calculations; PEMDAS and `**` (with the `^`-is-XOR gotcha)
 
 ### Game Environment Overview
 - Introduce existing game framework
 - Show game file locations and how to run the game (`python main.py`)
-
-### Variables & Data Types (Basic)
-- Integers, floats, strings, dictionaries
-- Assign simple values (character names, positions, etc.)
 
 ## Exercise: Customize the Game
 The student-facing steps for today live in
@@ -51,13 +68,15 @@ libraries are installed, using a small helper from `installer.py`:
 from installer import install
 
 # Install required packages if they're not already installed
-install("pygame-ce")  # Game development library (community fork, imports as "pygame")
-install("pytmx")  # Map loading library
-install("kagglehub")  # Dataset library
-install("requests")  # Library for web requests
-install("opencv-python")  # Computer vision library
-install("pytorch_lightning")
-install("openai")  # AI API library for dialogue generation
+# (commented out by default - uncomment a line if the game reports a missing library)
+# install("pygame-ce")  # Game development library (community fork, imports as "pygame")
+# install("pytmx")  # Map loading library
+# install("kagglehub")  # Dataset library
+# install("requests")  # Library for web requests
+# install("opencv-python")  # Computer vision library
+# install("torchvision")
+# install("pytorch_lightning")
+# install("openai")  # AI API library for dialogue generation
 
 import pygame  # Main game development library
 import sys  # System operations
@@ -76,25 +95,20 @@ from collections import deque
    `installer.py` file. This is an example of *code reuse*: using code we wrote in
    another file.
 
-2. **The `install(...)` calls** — each one checks whether a library is present and
-   installs it if not. Note `install("pygame-ce")`: we use the community fork of
-   pygame, which still imports as `import pygame`. (Teaching point: a package's
-   *install name* and its *import name* can differ.) During Week 1 the heavy AI
-   installs can be commented out to make startup faster — students will turn them on
-   in Week 2.
+2. **The `install(...)` calls (commented out by default)** — each one *would* check
+   whether a library is present and install it if not. They ship commented out because
+   the camp machines already have the core libraries; uncomment a line if the game
+   reports that library missing. Note `install("pygame-ce")`: the community fork of
+   pygame still imports as `import pygame` — a package's *install name* and its
+   *import name* can differ.
 
 3. **Standard library imports (`pygame`, `sys`, `os`)** — `pygame` is the game engine,
    `sys` is used for `sys.exit()`, and `os` is used to work with file paths.
 
-4. **Custom module imports** — note the three import *styles*, which is a great
-   discussion point:
-   - `from settings import *` pulls in every constant from `settings.py` (handy, but
-     use sparingly).
-   - `from main_menu import MainMenu` pulls in just one class.
-   - `import game_settings` imports the whole module so we call it as
-     `game_settings.load_settings()`.
-   - `from collections import deque` imports one tool from the standard library — the
-     `deque` is later used to remember the last few detected emotions in Week 2.
+4. **Custom module imports** — `from settings import *`, `from main_menu import MainMenu`,
+   `import game_settings`, and `from collections import deque`. Today students just
+   *notice* these lines exist; the three import **styles** (and `help`/`dir`/aliases) are
+   the formal **Day 2** libraries lesson.
 
 ### Game Class Structure
 **File**: [main.py](../../main.py) — `class Game`
@@ -173,6 +187,78 @@ TILE_SIZE = 64   # integer
 - The `@STUDENT-EDIT-Day1-*` comments mark exactly where students should make their
   Day 1 edits (window title, window size, background color).
 
+### Printing and f-strings
+**File**: [main.py](../../main.py) — `Game.__init__`
+
+Two adjacent markers introduce output. `@STUDENT-EDIT-Day1-5` adds a plain print;
+`@STUDENT-EDIT-Day1-6` introduces the f-string:
+
+```python
+        # @STUDENT-EDIT-Day1-5: ... print("Game starting!")
+        # @STUDENT-EDIT-Day1-6: ... print(f"Welcome to {TITLE}!")
+```
+
+**DETAILED WALKTHROUGH:**
+- `print("Game starting!")` displays literal text — the first thing to add so students
+  see the console react to their code.
+- `print(f"Welcome to {TITLE}!")` is a **formatted string literal (f-string)**: the `f`
+  before the quote lets you drop a variable inside `{ }`. `TITLE` comes from
+  `settings.py`, so the printed line changes when they change the title. This is the
+  cleanest way to combine text and variables and is used all over the codebase.
+
+### Reading Error Messages (on purpose)
+**File**: run from `main.py`
+
+The notebook meets errors early, so Day 1 does too (the *deep* debugging day is Day 4).
+Have students temporarily add a line that uses an undefined name (`@STUDENT-EDIT-Day1-7`
+in the Day 1 tutorial is a do-then-undo step, not a permanent code marker):
+
+```python
+print(last_name)   # add this, run, read the error, then delete it
+```
+
+**DETAILED WALKTHROUGH:**
+- The console shows `NameError: name 'last_name' is not defined`.
+- Teach the habit: **read the last line first** — it names the error type and the
+  problem. Reassure students that errors are normal and are the fastest way to learn.
+
+### Variables in Calculations and PEMDAS
+**Files**: [settings.py](../../settings.py) and [scratch.py](../../scratch.py)
+
+`@STUDENT-EDIT-Day1-8` adds two computed constants — variables used in math:
+
+```python
+SCREEN_CENTER_X = SCREEN_WIDTH / 2   # float: horizontal middle of the screen
+SCREEN_CENTER_Y = SCREEN_HEIGHT / 2  # float: vertical middle of the screen
+```
+
+**DETAILED WALKTHROUGH:**
+- These show that variables can be **used in expressions**, and that division (`/`)
+  always yields a `float`. The game centers UI with this same math, so it isn't busywork.
+- For pure arithmetic practice (which has no game surface), `scratch.py`'s
+  `@STUDENT-EDIT-Day1-9` holds two notebook exercises: `(100 - 5**3)/5 = -5.0` and
+  `15/4 + 6 = 9.75`. **Key gotcha:** `**` is "to the power of"; `^` is *not* — it's a
+  bitwise XOR. Python follows PEMDAS.
+
+### Data Types and Type Casting
+**Files**: [scratch.py](../../scratch.py) and [settings.py](../../settings.py)
+
+`@STUDENT-EDIT-Day1-10` (a note in `settings.py`, with practice in `scratch.py`):
+
+```python
+print(type(SCREEN_WIDTH))     # <class 'int'>
+print(type(SCREEN_CENTER_X))  # <class 'float'>  (division makes a float)
+y = int(3.99)                 # 3  -> truncates toward zero, does NOT round!
+z = float(3)                  # 3.0
+```
+
+**DETAILED WALKTHROUGH:**
+- `type()` reveals a value's type; `int()`/`float()` **cast** between types.
+- The most important insight (straight from the notebook): `int()` **truncates**, it
+  does not round — `int(3.99)` is `3`. This surprises students and is worth demoing live.
+- Tie-in: ML libraries are picky about types (e.g. models want floats/tensors), so
+  casting is a constant chore in real AI work — previews Week 2.
+
 ### The Program Entry Point
 **File**: [main.py](../../main.py) (bottom of file)
 
@@ -191,13 +277,16 @@ if __name__ == "__main__":
 
 ## Key Learning Points
 1. **How a Python program starts** — the `if __name__ == "__main__":` pattern and
-   top-to-bottom execution.
-2. **Imports** — built-in modules (`sys`, `os`), third-party libraries
-   (`pygame`/pygame-ce), and our own modules, plus the different import styles.
-3. **Basic class structure** — `class`, `def __init__(self)`, and `self`.
-4. **Initializing pygame** — `pygame.init()`, `set_mode`, `set_caption`, the `Clock`.
-5. **Variables and data types** — reading and editing the typed constants in
-   `settings.py`.
+   top-to-bottom execution (the notebook's "order of execution").
+2. **Variables and data types** — reading/editing typed constants in `settings.py`;
+   `type()` and casting, where `int()` truncates rather than rounds.
+3. **Printing and f-strings** — `print()` and `f"...{var}..."` to combine text + values.
+4. **Reading errors** — `NameError` and reading the last line of a traceback.
+5. **Arithmetic** — variables in calculations, PEMDAS, and `**` vs the `^`-is-XOR gotcha.
+6. **Basic class structure** — `class`, `def __init__(self)`, and `self`.
+7. **Initializing pygame** — `pygame.init()`, `set_mode`, `set_caption`, the `Clock`.
+8. **Imports are previewed, not taught yet** — students *notice* the `import` lines at
+   the top of `main.py`; the formal libraries lesson is Day 2.
 
 ## Extension Activities
 1. **Personalize the title** — change `TITLE` in [settings.py](../../settings.py)
@@ -208,14 +297,22 @@ if __name__ == "__main__":
    `@STUDENT-EDIT-Day1-5` marker in `Game.__init__` and watch the console.
 4. **Change the water color** — try `WATER_COLOR = "#FF0000"` (red)
    (marker `@STUDENT-EDIT-Day1-4`).
+5. **Print with an f-string** — add `print(f"Welcome to {TITLE}!")` at
+   `@STUDENT-EDIT-Day1-6` and watch the console.
+6. **Trigger and read an error** — temporarily `print(last_name)`, read the `NameError`'s
+   last line, then delete it.
+7. **Compute a value** — inspect/print `SCREEN_CENTER_X`/`SCREEN_CENTER_Y`
+   (`@STUDENT-EDIT-Day1-8`); resize the window and see them change.
+8. **Run the playground** — `python scratch.py` and work the PEMDAS
+   (`@STUDENT-EDIT-Day1-9`) and `type()`/casting (`@STUDENT-EDIT-Day1-10`) exercises.
 
 ## Troubleshooting Tips
 - **pygame won't install / tries to "build a wheel":** you are probably on a too-new
   Python. Use Python 3.11 or 3.12. The project installs `pygame-ce`, which has wheels
   for those versions.
 - **`ModuleNotFoundError`:** make sure you ran `python main.py` from inside the
-  `GatorAI_Camp_2026` folder, and that the `install(...)` calls at the top of
-  `main.py` are not all commented out.
+  `GatorAI_Camp_2026` folder. If a library really is missing, uncomment its
+  `install(...)` line at the top of `main.py` (they're commented out by default).
 - **GitHub clone issues:** re-clone with
   `git clone https://github.com/UFResearchComputing/GatorAI_Camp_2026` and confirm you
   can see the `.py` files plus the `graphics/`, `audio/`, `font/`, and `data/` folders.

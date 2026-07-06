@@ -174,6 +174,36 @@ def install(package_name):
   with a clear message instead of trying to compile from source on an unsupported
   Python version.
 
+### Capstone: From Your Python to Real AI (Bridge to Week 2)
+**File**: [bridge_to_week2.py](../../bridge_to_week2.py) — marker `@STUDENT-EDIT-Day5-4`
+
+The "Python for AI" notebook ends by using the week's skills on a real ML example. We
+retheme that finale to the camp's **own** AI so it previews Week 2 with **no new
+libraries**:
+
+```python
+EMOTION_REPLIES = {
+    "happy": "You're glowing today! ...",
+    "sad": "Chin up, friend. ...",
+    # ...
+}
+
+def respond_to_emotion(emotion):
+    """Take a detected emotion label and return an NPC reply that matches it."""
+    return EMOTION_REPLIES.get(emotion, "Hello there! Nice day for farming.")
+```
+
+**DETAILED WALKTHROUGH:**
+- This uses only Week-1 concepts: a **variable**, a **list** of emotions, a
+  **dictionary**, a **function** with a `return`, `.get()` with a default, and
+  **f-strings** in the demo loop. Run it with `python bridge_to_week2.py`.
+- The whole thing is the shape of real AI: **INPUT (emotion) → lookup → OUTPUT (reply)**.
+  Narrate the payoff: in Week 2 the webcam + a trained model produce the emotion, and a
+  Large Language Model produces the reply — the same pipeline at full scale (this is
+  exactly what `emotion_detector.py` and `ai_dialogue_manager.py` do).
+- Great confidence moment: students realize the AI they're about to build isn't magic —
+  it's the code shape they already understand.
+
 ## Key Learning Points
 1. **Pulling the week together** — sprites, dialogue, data structures, and UI in one
    project.
@@ -182,6 +212,8 @@ def install(package_name):
 4. **Manual testing** with `test_emotions.py`.
 5. **Reproducible setup** via `installer.py` so the project runs on someone else's
    machine.
+6. **Bridge to AI** — `respond_to_emotion()` in `bridge_to_week2.py` shows the
+   INPUT → model → OUTPUT shape that Week 2 fills in with a real model + LLM.
 
 ## Extension Activities
 1. **Add a celebrate animation** (`@STUDENT-EDIT-Day5-2`) and trigger it after a sale.
@@ -190,6 +222,8 @@ def install(package_name):
 4. **Write your own tiny test** modeled on `test_emotions.py` that checks your custom
    NPC returns your custom lines.
 5. **Record a short demo video** of your changes for the showcase.
+6. **Run the Week-2 bridge** — `python bridge_to_week2.py` (`@STUDENT-EDIT-Day5-4`) and add
+   your own emotions/replies to `EMOTION_REPLIES`.
 
 ## Presentation Guidelines
 - **Duration**: 3–5 minutes.

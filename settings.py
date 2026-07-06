@@ -10,7 +10,7 @@ Educational Concepts:
 - Coordinate systems and positioning
 - Game design parameters
 """
-# @STUDENT-EDIT-Day1-1: Examine datatypes in settings.py (identify strings, integers, lists). Add your own comment describing a variable.
+# @STUDENT-EDIT-Day1-1: Examine datatypes in settings.py (identify strings and integers). Add your own comment describing a variable.
 
 from pygame.math import Vector2
 
@@ -27,6 +27,19 @@ TITLE = "PyDew Valley: GAIC 26"  # Game window title text (Default: "PyDew Valle
 # @STUDENT-EDIT-Day1-4: Experiment with different background colors
 WATER_COLOR = "#71ddee"  # Hex color code for the water background (Default: "#71ddee")
 TILE_SIZE = 64  # Size of each tile in our game world (pixels) (Default: 64)
+
+# @STUDENT-EDIT-Day1-8: Variables can be used in CALCULATIONS! The two values below are
+# computed from SCREEN_WIDTH / SCREEN_HEIGHT above (/ means divide; Python follows the
+# PEMDAS order of operations). The game centers things on screen with this same math.
+# Try changing the screen size and see how these change too.
+SCREEN_CENTER_X = SCREEN_WIDTH / 2   # float: horizontal middle of the screen
+SCREEN_CENTER_Y = SCREEN_HEIGHT / 2  # float: vertical middle of the screen
+
+# @STUDENT-EDIT-Day1-10: Every value has a TYPE. Try adding a line like
+# print(type(SCREEN_WIDTH))     -> int   (a whole number)
+# print(type(SCREEN_CENTER_X))  -> float (division always makes a float)
+# You can also convert ("cast") between types: int(3.99) -> 3 (it TRUNCATES toward
+# zero, it does NOT round!) and float(64) -> 64.0. More casting practice is in scratch.py.
 
 # @STUDENT-EDIT-Day5-1: Customize the player name and greeting variables
 PLAYER_NAME = "Farmer"  # Name shown for the player (Default: "Farmer")
@@ -77,6 +90,10 @@ LAYERS = {
 # These dictionaries define where special objects (like apples) appear in the world
 
 # Apple tree positions - Small and Large trees have different apple locations
+# @STUDENT-EDIT-Day2-9: Each (x, y) pair below is a TUPLE - an ordered, fixed group of
+# values written with parentheses. Tuples are how Python bundles things like coordinates.
+# You'll also meet tuples when a function returns more than one value at once - see the
+# powers() example in scratch.py, and how to "unpack" a tuple into separate variables.
 APPLE_POS = {
     "Small": [
         (18, 17),
@@ -138,6 +155,10 @@ PURCHASE_PRICES = {
 # =============================================================================
 # Students can easily add new characters to the game here!
 # @STUDENT-EDIT-Day2-1: Add your custom sprite image name to the character list
+# @STUDENT-EDIT-Day2-6: Good NAMING matters. The key "Robin" below is a name you choose.
+# Rules: use letters/digits/underscores, don't start with a digit, and make it meaningful.
+# Python is case-sensitive, so "Robin" and "robin" are different names. (Illegal names
+# like 1st_npc or my$npc would cause an error.) PEP8 style prefers lower_case_with_underscores.
 # For each NPC, define:
 # - name: Display name of the character
 # - pos: Grid coordinates or pixel coordinates (x, y)

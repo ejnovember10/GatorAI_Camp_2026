@@ -36,3 +36,6 @@ ai_materials/navigator_api_key.json
 CLAUDE.local.md
 teaching_guides/DOC_SCRUB_LOG.md
 
+# Local-only curriculum integration planning doc (this repo instance only)
+teaching_guides/notebook_integration_plan.md
+

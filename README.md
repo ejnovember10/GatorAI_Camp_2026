@@ -42,16 +42,22 @@ All code in this project should be:
 - **Hello World**: Demonstrate running "Hello, World!" in a Python script
 
 #### Core Concepts
+> Day 1 follows the "Python for AI" notebook order: variables → print → f-strings →
+> reading errors → calculations → PEMDAS → data types & casting. **Libraries move to Day 2.**
 - **Basic Python Syntax**
-  - Simple print statements and comments
-  - Indentation rules in Python
-- **Libraries and Importing**: Explain how to import and use external libraries
+  - Simple print statements and `#` comments; indentation rules in Python
+- **Variables & Data Types**
+  - Integers, floats, strings, dictionaries; the `type()` function and type casting
+  - Assign simple values (character names, positions, etc.)
+- **Printing & f-strings**
+  - `print()` for text and variables; f-strings to combine them
+- **Reading Error Messages**
+  - `NameError` and reading the last line of a traceback
+- **Arithmetic**
+  - Variables in calculations; PEMDAS and `**` (with the `^`-is-XOR gotcha)
 - **Game Environment Overview**
   - Introduce existing game framework
   - Show game file locations and how to run the game
-- **Variables & Data Types (Basic)**
-  - Integers, floats, strings
-  - Assign simple values (character names, positions, etc.)
 
 #### Exercise: Customize a Splash Screen
 - Modify "Hello, World!" splash screen to display welcome message
@@ -65,15 +71,21 @@ All code in this project should be:
 **Objective**: Explore game mechanics and make active changes to game code.
 
 #### Core Concepts
+> Day 2 follows the notebook order: lists → naming/PEP8 → comments → libraries → functions
+> (tuples, `None`, positional args, defaults, scope). Conditionals/loops are camp-native.
+- **Lists & Zero-Indexing**
+  - Sequences in square brackets; `[0]` is the first item; lists can mix types
+- **Variable Naming & PEP8**
+  - Meaningful, legal, case-sensitive names
+- **Libraries & Importing** (moved here from Day 1)
+  - Import styles, `help`/`dir`, and aliases
+- **Functions**
+  - Read the player's methods, then write your own (`def`/`return`); tuples, `None`,
+    positional arguments, default values, and scope
 - **Loading Character Sprites**
-  - Import image files (PNGs, JPGs) into game code
-  - Position sprites on screen
+  - Import image files (PNGs, JPGs) into game code; position sprites on screen
 - **Basic Conditionals**
-  - `if` statements for simple conditions
-  - Examples: button presses, health checks
-- **Simple Functions**
-  - Create functions like `move_character()` 
-  - Demonstrate code organization benefits
+  - `if` statements for button presses and checks; logical `or`
 
 #### Exercise: Adding Your First Character
 - Add a single character sprite to the game
