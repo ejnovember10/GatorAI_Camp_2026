@@ -114,8 +114,8 @@ clearly-typed values students can read and change:
 SCREEN_WIDTH = 1280   # integer
 SCREEN_HEIGHT = 720   # integer
 # @STUDENT-EDIT-Day1-2: Customize the game window title (TITLE)
-TITLE = "PyDew Valley: GAIC 26"   # string
-# @STUDENT-EDIT-Day1-4: Experiment with different background colors
+TITLE = "A Farmer's Dream"   # string
+# @STUDENT-EDIT-Day1-4: ExPyDew Valley: GAIC 26periment with different background colors
 WATER_COLOR = "#71ddee"   # string holding a hex color code
 TILE_SIZE = 64   # integer
 ```
