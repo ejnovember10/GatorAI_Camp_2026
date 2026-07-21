@@ -169,9 +169,18 @@ NPC_DATA = {
         "pos": (800, 400),  # Default spawn position
         "graphic": "graphics/objects/merchant.png",  # Placeholder using existing asset (Default: "graphics/objects/merchant.png")
         "dialogue": [
-            "Hi there! Welcome to PyDew Valley!",
+            "Hi there! Welcome to A Farmer's Dream!",
             "I'm Robin, a helper NPC created using Python classes.",
             "Try editing settings.py to change what I say, or create your own custom NPC!"
+        ]  # Default starter dialogue lines
+    },
+    "Sunny": {
+        "pos": (1060, 1663),  # Default spawn position
+        "graphic": "graphics/objects/sunnybetter.png",  # Placeholder using existing asset (Default: "graphics/objects/merchant.png")
+        "dialogue": [
+            "Hello! My name is Sunny!",
+            "I'm your bright and bubbly friend, here to cheer you on!",
+            "I hope you have a ray-mazing day!"
         ]  # Default starter dialogue lines
     }
 }
