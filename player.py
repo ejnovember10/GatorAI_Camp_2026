@@ -48,6 +48,7 @@ class Player(pygame.sprite.Sprite):
         npc_sprites,  # Custom NPCs
         trigger_dialogue,  # Callback to trigger dialogue
         shake_camera,  # Callback to shake camera
+        
     ):
         """Set up the player's graphics, movement, tools, inventory, and callbacks.
 
@@ -85,6 +86,7 @@ class Player(pygame.sprite.Sprite):
             "tool switch": Timer(200),  # Delay between switching tools
             "seed use": Timer(350, self.use_seed),  # How often seeds can be planted
             "seed switch": Timer(200),  # Delay between switching seeds
+            "action": Timer(400), #animation speed for celebrate
         }
         # TOOL SYSTEM - Different tools for different tasks
         self.tools = ["hoe", "axe", "water"]  # Available tools
@@ -182,6 +184,7 @@ class Player(pygame.sprite.Sprite):
             # Using the watering can
             "right_water": [], "left_water": [], "up_water": [], "down_water": [],
             # @STUDENT-EDIT-Day5-2: Add custom animation folder path here (e.g. 'celebrate')
+            "right_celebrate": [], "left_celebrate": [], "up_celebrate": [], "down_celebrate": [],
         }
 
         # Fill each list by loading the matching graphics/character/<state> folder
@@ -209,20 +212,20 @@ class Player(pygame.sprite.Sprite):
 
             # MOVEMENT CONTROLS (vertical)
             # @STUDENT-EDIT-Day2-5: Amend input controls to allow WASD movement using the logical 'or'
-            if keys[pygame.K_UP]:
+            if keys[pygame.K_UP] or keys[pygame.K_w]:
                 self.direction.y = -1
                 self.status = "up"
-            elif keys[pygame.K_DOWN]:
+            elif keys[pygame.K_DOWN] or keys[pygame.K_s]:
                 self.direction.y = 1
                 self.status = "down"
             else:
                 self.direction.y = 0
 
             # MOVEMENT CONTROLS (horizontal)
-            if keys[pygame.K_RIGHT]:
+            if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
                 self.direction.x = 1
                 self.status = "right"
-            elif keys[pygame.K_LEFT]:
+            elif keys[pygame.K_LEFT] or keys[pygame.K_a]:
                 self.direction.x = -1
                 self.status = "left"
             else:
@@ -277,16 +280,23 @@ class Player(pygame.sprite.Sprite):
                         else:  # bed -> sleep
                             self.status = "left_idle"
                             self.sleep = True
+                            
+            if keys[pygame.K_f] and not self.timers["action"].active:
+                self.timers["action"].activate()
+                self.direction = pygame.math.Vector2()
+                self.frame_index = 0
+                
 
     def get_status(self):
-        """Pick the animation state from movement/tool use (e.g. "right" -> "right_idle")."""
-        # Not moving -> idle version of the current facing direction
-        if self.direction.magnitude() == 0:
-            self.status = self.status.split("_")[0] + "_idle"
+        if self.timers["action"].active:
+            self.status = self.status.split("_")[0] + "_celebrate"
+            return
 
-        # Using a tool -> tool version (e.g. "right" + "hoe" -> "right_hoe")
+        if self.direction.magnitude() == 0:
+             self.status = self.status.split("_")[0] + "_idle"
+
         if self.timers["tool use"].active:
-            self.status = self.status.split("_")[0] + "_" + self.selected_tool
+             self.status = self.status.split("_")[0] + "_" + self.selected_tool
 
     def update_timers(self):
         """Tick every timer so its cooldown counts down."""
@@ -336,7 +346,8 @@ class Player(pygame.sprite.Sprite):
         self.collision("vertical")
 
         # @STUDENT-EDIT-Day2-4: Add a simple boundary check 'if' statement to prevent the player from leaving the screen.
-
+        if self.pos.y < 0:
+            self.pos.y = 0
     def update(self, dt):
         """Run one frame of the player: input -> status -> timers -> aim -> move -> animate."""
         self.input()

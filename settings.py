@@ -171,7 +171,7 @@ NPC_DATA = {
         "dialogue": [
             "Hi there! Welcome to A Farmer's Dream!",
             "I'm Robin, a helper NPC created using Python classes.",
-            "Try editing settings.py to change what I say, or create your own custom NPC!"
+            "Fun fact: my favorite bird is a woodpecker!"
         ]  # Default starter dialogue lines
     },
     "Sunny": {
